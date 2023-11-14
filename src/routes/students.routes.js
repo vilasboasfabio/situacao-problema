@@ -1,43 +1,16 @@
 import { Router } from "express";
+import { getStudents, getStudentById, createStudent, updateStudent, deleteStudent } from "../controllers/students.controller.js";
 
 const studentsRoutes = Router();
 
-studentsRoutes.get("/", (req, res) => {
-    return res.status(200).send({ message: "Get all students" });
-    }
-);
+studentsRoutes.get("/", getStudents);
 
-studentsRoutes.get("/:id", (req, res) => {
-    const { id } = req.params;
-    return res.status(200).send({ message: `Get student ${id}` });
-    }
-);
+studentsRoutes.get("/:id", getStudentById);
 
-studentsRoutes.post("/", (req, res) => {
-    const { name, email, age } = req.body;
+studentsRoutes.post("/", createStudent);
 
-    if (!name || !email || !age) {
-        return res.status(400).send({ message: "Missing fields" });
-    }
-    return res.status(200).send({ message: `Create student ${name} with an e-mail as ${email} and ${age} yers old` });
-    }
-);
+studentsRoutes.put("/:id", updateStudent);
 
-studentsRoutes.put("/:id", (req, res) => {
-    const { id } = req.params;
-    const { name, email, age } = req.body;
-
-    if (!name || !email || !age) {
-        return res.status(400).send({ message: "Missing fields" });
-    }
-    return res.status(200).send({ message: `Update student ${id} with name ${name}, email ${email} and ${age} years old` });
-    }
-);
-
-studentsRoutes.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    return res.status(200).send({ message: `Delete student ${id}` });
-    }
-);
+studentsRoutes.delete("/:id", deleteStudent);
 
 export default studentsRoutes;

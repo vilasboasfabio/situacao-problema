@@ -1,7 +1,12 @@
 import { Router } from "express";
 import studentsRoutes from "./students.routes.js";
+import coursesRoutes from "./courses.routes.js";
+
+
 
 const router = Router();
+
+router.use("/courses", coursesRoutes);
 
 router.use("/students", studentsRoutes);
 
